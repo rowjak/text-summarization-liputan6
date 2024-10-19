@@ -9,15 +9,15 @@ import base64
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = '.media/'
+UPLOAD_FOLDER = 'uploads_model/.media/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limit to 16MB
 
 if not os.path.exists(UPLOAD_FOLDER):
     print("tidak ada folder .media")
 
-tokenizer = AutoTokenizer.from_pretrained("uploads_model/bert-indonesian-news-summarization")
-model = AutoModelForSeq2SeqLM.from_pretrained("uploads_model/bert-indonesian-news-summarization")
+tokenizer = AutoTokenizer.from_pretrained("rowjak/bert-indonesian-news-summarization")
+model = AutoModelForSeq2SeqLM.from_pretrained("rowjak/bert-indonesian-news-summarization")
 
 # Move model to GPU if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -90,11 +90,11 @@ def webhook():
         from_number = data['payload'].get('from', None)
 
         response = requests.post(
-            'https://whatsapp.inspektorat.pekalongankab.go.id/api/sendFile',
+            'https://xxxx/api/sendFile',
             headers={
                 'Content-Type': 'application/json; charset=utf-8',
                 'Accept': 'application/json',
-                'X-Api-Key': 'KMZWAY87AA'
+                'X-Api-Key': 'xxxx'
             },
             json={
                 'chatId': from_number,
@@ -132,11 +132,11 @@ def webhook():
         from_number = data['payload'].get('from', None)
 
         response = requests.post(
-            'https://whatsapp.inspektorat.pekalongankab.go.id/api/sendText',
+            'https://xxxx/api/sendText',
             headers={
                 'Content-Type': 'application/json; charset=utf-8',
                 'Accept': 'application/json',
-                'X-Api-Key': 'KMZWAY87AA'
+                'X-Api-Key': 'xxxx'
             },
             json={  # Menggunakan parameter `json` untuk mengirim raw JSON
                 'chatId': from_number,
